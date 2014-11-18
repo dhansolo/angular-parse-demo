@@ -9,11 +9,19 @@
 "use strict";
 
 angular.module('GitHubApp', [])
-    .controller('GitHubController', function($scope) {
-        $scope.userName = 'drstearns';
+    .controller('GitHubController', function($scope, $http) {
+        $scope.userName = 'jcbmrrs';
         $scope.getRepos = function() {
 
-            //add code here
+			$http.get('https://api.github.com/users/'+$scope.userName+'/repos')
+				.success(function(data) {
+			 		//data will contain data sent by the server in response
+					//var prettyPrint = ;
+					$scope.repos = data;
+				})
 
+			 	.error(function(err) {
+			 		//err will contain error information
+				});
         };
     });
